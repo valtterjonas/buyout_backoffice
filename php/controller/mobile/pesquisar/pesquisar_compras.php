@@ -13,11 +13,9 @@ $estado = $_REQUEST["estado"];
 
 if(isset($_REQUEST["u_id"])){
 
-    if(strcmp($estado,"pendente") == 0){
+    if(strcmp($estado,"entregue") == 0){
 
-        $estado = "entregue";
-
-        $compras = select("c_compra c,ce_compra_estado ce","*","WHERE c.u_id = '$utilizador' AND ce.ce_estado NOT LIKE '$estado' AND ce.ce_id = c.ce_id ORDER BY c.c_id DESC");
+        $compras = select("c_compra c,ce_compra_estado ce","*","WHERE c.u_id = '$utilizador' AND ce.ce_estado LIKE '$estado' AND ce.ce_estado_cliente LIKE '$estado' AND ce.ce_id = c.ce_id ORDER BY c.c_id DESC");
 
     }else{
 
@@ -26,8 +24,21 @@ if(isset($_REQUEST["u_id"])){
     }
 }else {
 
+    if(strcmp($estado,"pendente") == 0) {
+
+
+        $estado = "entregue";
+
+        $compras = select("c_compra c,ce_compra_estado ce", "*", "WHERE ce.ce_estado NOT LIKE '$estado' AND ce.ce_id = c.ce_id ORDER BY c.c_id DESC");
+
+
+    }else{
 
         $compras = select("c_compra c,ce_compra_estado ce", "*", "WHERE ce.ce_estado LIKE '$estado' AND ce.ce_id = c.ce_id ORDER BY c.c_id DESC");
+
+
+    }
+
 
 }
 

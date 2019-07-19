@@ -22,6 +22,8 @@ if($compras){
     $cliente_id = $compras[0]["u_id"];
     $dadosUser = select("u_utilizador","u_nome,u_email,u_contacto,u_email,u_id,u_endereco","WHERE u_id = '$cliente_id'");
 
+    $localizacaoCliente = select("ml_motorista_localizacao,l_localizacao","*",
+        "WHERE u_id = '$cliente_id' AND l_localizacao.l_id = ml_motorista_localizacao.l_id ORDER BY ml_id DESC");
 
     if(strcmp($compras[0]["ce_estado"],"a_caminho") == 0){
 
@@ -29,6 +31,8 @@ if($compras){
 
         $localizacao = select("ml_motorista_localizacao,l_localizacao","*",
             "WHERE u_id = '$motorista' AND l_localizacao.l_id = ml_motorista_localizacao.l_id ORDER BY ml_id DESC");
+
+
 
         if($localizacao){
 
@@ -41,15 +45,22 @@ if($compras){
                 'motorista'=>$motorista,
                 'latitude'=>$localizacao[0]["l_latitude"],
                 'longitude'=>$localizacao[0]["l_longitude"],
+                'latitude_cliente'=>$localizacaoCliente[0]["l_latitude"],
+                'longitude_cliente'=>$localizacaoCliente[0]["l_longitude"],
                 'tempo_chegada'=>"A calcular",
                 'valor_total'=>number_format(somaProdutos($compras[0]["c_id"]),2,'.',','),
                 'dadosUser'=>$dadosUser[0],
-                'listaProdutos'=>listaProdutos($compras[0]["c_id"])
+                'listaProdutos'=>listaProdutos($compras[0]["c_id"]),
+                 'listaProdutos2'=>array('Data'=>listaProdutos($compras[0]["c_id"]))
+
 
             );
         }
 
     }else{
+
+        $localizacao = select("ml_motorista_localizacao,l_localizacao","*",
+            "WHERE u_id = '$motorista' AND l_localizacao.l_id = ml_motorista_localizacao.l_id ORDER BY ml_id DESC");
 
         $mensagem[] = array(
             'erro'=>false,
@@ -58,12 +69,14 @@ if($compras){
             'data'=>date("d-M-Y", strtotime($compras[0]["c_data_criacao"])),
             'estado'=>$compras[0]["ce_estado"],
             'motorista'=>$motorista,
-            'latitude'=>"",
-            'longitude'=>"",
+            'latitude'=>$localizacao[0]["l_latitude"]."",
+            'longitude'=>$localizacao[0]["l_longitude"]."",
+            'latitude_cliente'=>$localizacaoCliente[0]["l_latitude"],
+            'longitude_cliente'=>$localizacaoCliente[0]["l_longitude"],
             'tempo_chegada'=>"Não Aplicável",
             'valor_total'=>number_format(somaProdutos($compras[0]["c_id"]),2,'.',','),
             'dadosUser'=>$dadosUser[0],
-            'listaProdutos'=>array('Data'=>listaProdutos($compras[0]["c_id"]))
+            'listaProdutos2'=>array('Data'=>listaProdutos($compras[0]["c_id"]))
 
         );
 
