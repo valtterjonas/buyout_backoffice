@@ -92,6 +92,7 @@
                                                 <th>Ultimo login</th>
                                                 <th>Estado</th>
                                                 <th>Data de Criação</th>
+                                                <th>Acção</th>
 
                                             </tr>
                                             </thead>
@@ -145,10 +146,108 @@
             </div>
         </div>
     </div>
+
+<div class="modal fade" id="actualizarPassword">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Actualizar Password</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+
+
+                <form id="formActualizarSenha" method="post" action="php/controller/actualizar/actualizar_password.php">
+
+                    <div class="form-row">
+
+
+                        <div class="form-group col-md-12">
+                            <input type="password" name="u_senha" id="act_u_senha" class="form-control" placeholder="Senha">
+                        </div> <!-- form-group end.// -->
+
+                        <div class="form-group col-md-12">
+                            <input type="password" name="u_resenha" id="act_u_resenha" class="form-control" placeholder="Repetir Senha">
+                        </div> <!-- form-group end.// -->
+
+                        <div class="form-group col-md-12 hidden">
+                            <input type="number" name="u_id" id="u_id" class="form-control"  readonly>
+                        </div> <!-- form-group end.// -->
+
+
+
+                    </div> <!-- form-row end.// -->
+
+
+
+                    <div class="form-group  col-md-12 ">
+                        <button type="submit" id="bt_gravar" class="btn btn-primary btn-block"> Alterar Senha <i class="fa fa-edit"></i> </button>
+                    </div> <!-- form-group// -->
+
+                </form>
+
+
+
+
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="desactivarUtilizador">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Desactivar utilizador?</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+
+
+                <form id="formDesactivarUtilizador" method="post" action="php/controller/actualizar/desactivar_utilizador.php">
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-12 hidden">
+                            <input type="number" name="u_id2" id="u_id2" class="form-control"  readonly>
+                        </div> <!-- form-group end.// -->
+
+
+
+                    </div> <!-- form-row end.// -->
+
+
+
+                    <div class="form-group  col-md-12 ">
+                        <button type="submit" id="bt_gravar" class="btn btn-danger btn-block"> Remover Utilizador <i class="fa fa-edit"></i> </button>
+                    </div> <!-- form-group// -->
+
+                </form>
+
+
+
+
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
     <!-- end model popup -->
 </div>
 <!-- jQuery -->
-<script src="js/jquery.min.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <!-- wow animation -->
@@ -168,7 +267,6 @@
     var ps = new PerfectScrollbar('#sidebar');
 </script>
 <!-- fancy box js -->
-<script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/jquery.fancybox.min.js"></script>
 <!-- custom js -->
 <script src="js/custom.js"></script>
@@ -184,6 +282,172 @@
 <script src="modules/jquery-datatable/extensions/export/vfs_fonts.js"></script>
 <script src="modules/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
 <script src="modules/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+
+
+<script>
+
+    $('#actualizarPassword').on('show.bs.modal', function (e) {
+
+        var data = $(e.relatedTarget).data('id');
+
+        $('#u_id').val(data);
+
+    });
+
+
+    $('#desactivarUtilizador').on('show.bs.modal', function (e) {
+
+        var data = $(e.relatedTarget).data('id');
+
+        $('#u_id2').val(data);
+
+    });
+
+
+
+    $("#formActualizarSenha").on('submit',(function(e) {
+        e.preventDefault();
+
+        var action = $("#formActualizarSenha").attr('action');
+
+        alert("Validate");
+
+
+        var u_senha = $('#act_u_senha').val();
+        var u_resenha = $('#act_u_resenha').val();
+
+
+        alert(u_grupo);
+
+        if(u_senha === "" || u_resenha === ""){
+            swal({
+                title: "Aviso!",
+                text: "Os campos devem ser preenchidos com dados válidos!",
+                icon: "warning",
+                button: "Ok!"
+            });
+        }else if(u_senha !== u_resenha){
+            swal({
+                title: "Aviso!",
+                text: "As senhas não correspondem!",
+                icon: "warning",
+                button: "Ok!"
+            });
+        }else {
+
+            $.ajax({
+                url: action,
+                type: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function(){
+                    $('#carregamento').css("display","block");
+                },
+                complete: function(){
+                    $('#carregamento').css("display","none");
+                },
+                success: function (data) {
+
+
+                    var result = JSON.parse(data);
+
+                    if (result.estado === 'sucesso') {
+
+                        swal({
+                            title: "Óptimo, Utilizador actualizado!",
+                            icon: "success",
+                            button: "Ok!"
+                        }).then(function () {
+
+                            // $('#adicionarUtilizadorModal').modal('toggle');
+
+                            window.location.reload(true);
+
+                        });
+
+
+                    }
+                    else {
+                        swal({
+                            title: "Erro, o utilizador não foi actualizado!",
+                            icon: "error",
+                            button: "Ok!"
+                        });
+                    }
+                },
+                error: function (e) {
+//                            $("#err").html(e).fadeIn();
+                }
+            });
+        }
+    }));
+
+    $("#formDesactivarUtilizador").on('submit',(function(e) {
+        e.preventDefault();
+
+        var action = $("#formDesactivarUtilizador").attr('action');
+
+        alert("Validate");
+
+
+        $.ajax({
+            url: action,
+            type: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function(){
+                $('#carregamento').css("display","block");
+            },
+            complete: function(){
+                $('#carregamento').css("display","none");
+            },
+            success: function (data) {
+
+
+                var result = JSON.parse(data);
+
+                if (result.estado === 'sucesso') {
+
+
+                    $('#img1').attr('src', 'http://placehold.it/120x120');
+
+
+                    swal({
+                        title: "Óptimo, Utilizador registado!",
+                        icon: "success",
+                        button: "Ok!"
+                    }).then(function () {
+
+                        // $('#adicionarUtilizadorModal').modal('toggle');
+
+                        window.location.reload(true);
+
+                    });
+
+
+                }
+                else {
+                    swal({
+                        title: "Erro, o utilizador não foi criado!",
+                        icon: "error",
+                        button: "Ok!"
+                    });
+                }
+            },
+            error: function (e) {
+//                            $("#err").html(e).fadeIn();
+            }
+        });
+
+    }));
+
+
+</script>
+
 
 </body>
 </html>

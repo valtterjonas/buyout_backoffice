@@ -52,6 +52,9 @@ function listarUtilizador($tipo){
                                                 <td>'.$u_ultimo_login.'</td>
                                                 <td>'.$u_estado.'</td>
                                                 <td>'.$u_data_criacao.'</td>
+                                                <td> <a href="#" data-toggle="modal" data-target="#actualizarPassword" data-id="'.$u_id.'"> <i class="fa fa-lock"></i> </a>
+                                                <a href="#" data-toggle="modal" data-target="#desactivarUtilizador" data-id="'.$u_id.'"> <i class="fa fa-remove"></i> </a> </td>
+
                                             
                                             </tr>
                 ';

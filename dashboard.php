@@ -124,7 +124,7 @@
                            <div class="white_shd full">
                               <div class="full graph_head">
                                  <div class="heading1 margin_0">
-                                    <h2>Extra Area Chart</h2>
+                                    <h2>Gráfico de Compras (Metical)</h2>
                                  </div>
                               </div>
                               <div class="full graph_revenue">
@@ -157,7 +157,7 @@
          </div>
       </div>
       <!-- jQuery -->
-      <script src="js/jquery.min.js"></script>
+      <script src="js/jquery-3.3.1.min.js"></script>
       <script src="js/popper.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
       <!-- wow animation -->

@@ -94,11 +94,7 @@
                                             </thead>
                                             <tbody id="t_tabela">
 
-                                            <td>1</td>
-                                            <td>Anna</td>
-                                            <td>Pitt</td>
-                                            <td>35</td>
-                                            <td>New York</td>
+
 
                                             </tbody>
                                         </table>
@@ -190,7 +186,7 @@
 
     var token = getUrlParameter("token");
 
-    alert(token);
+    //alert(token);
 
     $.ajax({
         url: "php/controller/pesquisar/pesquisar_produtos_compra.php",
@@ -206,7 +202,7 @@
         },
         success: function (data) {
 
-            alert(data);
+            //alert(data);
 
             var result = JSON.parse(data);
 

@@ -48,8 +48,9 @@ $data_actual = date("Y-m-d H:i:s");
                                                 <td>' . $p_ultimo_preco . '</td>
                                                 <td>' . $p_desconto . '</td>
                                                 <td>' . $s_id . '</td>
-                                                <td> <button type="button" class="btn btn-primary" data-toggle="modal" data-id="'.$p_imagem.'" data-target="#imagemModal"> Ver Imagem</button></td>
+                                                <td> <button type="button" class="btn btn-primary" data-toggle="modal" data-produto="'.$p_id.'" data-id="'.$p_imagem.'" data-target="#imagemModal"> Ver Imagem</button></td>
                                                 <td>' . $p_data_criacao . '</td>
+                                                <td> <a href="#" onclick="goToEditar('.$p_id.')"> Editar <i class="fa fa-edit"></i> </a> </td>
                                             </tr>
                 ';
 
@@ -68,3 +69,5 @@ $data_actual = date("Y-m-d H:i:s");
 
         }
     }
+
+

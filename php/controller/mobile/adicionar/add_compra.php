@@ -14,6 +14,7 @@ $u_id = $_REQUEST["u_id"];
 $lista_produtos = $_REQUEST["produtos"];
 $latitude = $_REQUEST["latitude"];
 $longitude = $_REQUEST["longitude"];
+$preco_total = $_REQUEST["preco_total"];
 $produtos = json_decode($lista_produtos);
 $data_criacao = date("Y/m/d H:i:s");
 $compraNome = rand(100,10000)."_compra";
@@ -26,7 +27,7 @@ if($addCompraEstado){
     $max_ce_id = select("ce_compra_estado","MAX(ce_id) AS 'id'")[0]["id"];
 
 
-    $addCompra = adicionar(array("c_nome","ce_id","c_data_criacao","u_id"),array($compraNome,$max_ce_id,$data_criacao,$u_id),"c_compra");
+    $addCompra = adicionar(array("c_nome","ce_id","c_data_criacao","u_id","c_preco_total"),array($compraNome,$max_ce_id,$data_criacao,$u_id,$preco_total),"c_compra");
 
     $addLocalizacao = adicionar(array("l_latitude","l_longitude","l_data_criacao"),array($latitude,$longitude,$data_criacao),"l_localizacao");
 

@@ -194,7 +194,6 @@
 
         var data = $(e.relatedTarget).data('id');
 
-        alert(data);
 
         $('#imagem').attr('src','images/produtos/'+data)
 

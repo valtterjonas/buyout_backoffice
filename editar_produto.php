@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
-    <title>Buyout - Backoffice</title>
+    <title>Novo Produto</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -21,15 +21,14 @@
     <!-- responsive css -->
     <link rel="stylesheet" href="css/responsive.css" />
     <!-- color css -->
-    <link rel="stylesheet" href="css/colors.css" />
+
     <!-- select bootstrap -->
     <link rel="stylesheet" href="css/bootstrap-select.css" />
     <!-- scrollbar css -->
     <link rel="stylesheet" href="css/perfect-scrollbar.css" />
     <!-- custom css -->
     <link rel="stylesheet" href="css/custom.css" />
-    <!-- calendar file css -->
-    <link rel="stylesheet" href="js/semantic.min.css" />
+
     <!-- fancy box js -->
     <link rel="stylesheet" href="css/jquery.fancybox.css" />
     <!--[if lt IE 9]>
@@ -70,55 +69,84 @@
                         <!-- table section -->
                         <div class="col-md-12">
                             <div class="white_shd full margin_bottom_30">
+
                                 <div class="full graph_head">
                                     <div class="heading1 margin_0">
-                                        <h2>Tabela de Produtos</h2>
+                                        <h2>Editar Produto</h2>
 
                                     </div>
 
-                                    <div class="button_block"><a href="novo_produto.php" class="pull-right btn cur-p btn-primary">Adicionar Produto</a></div>
 
                                 </div>
 
 
                                 <div class="table_section padding_infor_info">
 
-                                    <div class="table-responsive-sm">
-                                        <table class="table">
-                                            <thead>
+                                    <form id="formActualizar" method="post" action="php/controller/actualizar/editar_produto.php">
 
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Nome</th>
-                                                <th>Descrição</th>
-                                                <th>Preço</th>
-                                                <th>Último Preço</th>
-                                                <th>Desconto</th>
-                                                <th>SubCategoria</th>
-                                                <th>Imagem</th>
-                                                <th>Data de Criação</th>
-                                                <th>Opções</th>
-
-                                            </tr>
-
-                                            </thead>
-
-                                            <tbody>
-
-                                            <?php
+                                        <div class="form-row">
 
 
-                                            include_once ("php/controller/pesquisar/pesquisar_produto.php");
+                                            <div class="form-group col-md-4">
+                                                <input type="text" name="p_nome" id="p_nome" class="form-control" placeholder="Nome do Produto">
+                                            </div> <!-- form-group end.// -->
 
-                                            listarProdutos();
+                                            <div class="col-md-4 form-group">
+                                                <input type="number" name="p_preco" id="p_preco" class="form-control" placeholder="Preço">
+                                            </div> <!-- form-group end.// -->
 
 
-                                            ?>
+                                            <div class="col-md-4 form-group">
+                                                <input type="number" name="p_ultimo_preco" id="p_ultimo_preco" class="form-control" placeholder="Ultimo Preço">
+                                            </div> <!-- form-group end.// -->
+
+                                            <div class="col-md-4 form-group">
+                                                <input type="number" name="p_desconto" id="p_desconto" class="form-control" placeholder="Desconto">
+                                            </div> <!-- form-group end.// -->
+
+                                            <div class="col-md-4 form-group">
+                                                <select name="p_subcategoria" id="p_subcategoria" class="form-control">
+                                                    <?php
 
 
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                    include_once ("php/controller/pesquisar/pesquisar_subcategoria.php");
+
+                                                    listarSubCategoriaSelect();
+
+
+                                                    ?>
+                                                </select>
+                                            </div> <!-- form-group end.// -->
+
+                                            <div class="col-md-4 form-group">
+                                                <select name="p_estado" id="p_estado" class="form-control">
+                                                    <option value="Activo">Activo</option>
+                                                    <option value="Inactivo">Inactivo</option>
+                                                </select>
+                                            </div> <!-- form-group end.// -->
+
+                                            <div class="col-md-12 form-group">
+                                                <textarea cols="4" name="p_descricao" id="p_descricao" class="form-control" placeholder=" Descrição "> </textarea>
+                                            </div> <!-- form-group end.// -->
+
+                                            <div class="col-md-12 form-group hidden">
+                                                <input name="p_id" id="p_id" class="form-control"> </input>
+                                            </div> <!-- form-group end.// -->
+
+
+
+
+                                        </div> <!-- form-row end.// -->
+
+
+
+                                        <div class="form-group  col-md-12 ">
+                                            <button type="submit" id="bt_gravar" class="btn btn-primary btn-block"> Editar Produto <i class="fa fa-edit"></i> </button>
+                                        </div> <!-- form-group// -->
+
+                                    </form>
+
+
                                 </div>
                             </div>
                         </div>
@@ -137,55 +165,17 @@
     </div>
     <!-- model popup -->
     <!-- The Modal -->
-    <div class="modal fade" id="imagemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Imagem do Produto</h4>
+                    <h4 class="modal-title">Modal Heading</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
-
-
-                    <div class="row">
-
-                        <div class="col-md-8">
-
-                            <img src="" class="img-box" id="imagem" style="width: 400px; height: 350px">
-
-                        </div>
-
-                        <div class="col-md-4">
-
-                            <form id="formAlterarFoto" action="php/controller/actualizar/editar_foto_produto.php">
-
-                                <div class="col-md-12 form-group">
-                                    <span>Editar foto do Produto</span>
-                                    <label class=newbtn>
-                                        <img id="img1" src="http://placehold.it/120x120" height="120px" width="120px">
-                                        <input id="p_imagem" name="p_imagem" class='pis form-control' onchange="readURL(this);" type="file" accept="image/*">
-                                    </label>
-                                </div>
-
-                                <div class="col-md-12 form-group hidden">
-                                    <input name="p_id" id="p_id" class="form-control">
-                                </div> <!-- form-group end.// -->
-
-
-                                <div class="form-group  col-md-12 ">
-                                    <button type="submit" id="bt_editar_foto" class="btn btn-primary btn-block"> Editar Foto <i class="fa fa-edit"></i> </button>
-                                </div> <!-- form-group// -->
-
-                            </form>
-
-                        </div>
-
-
-                    </div>
-
-
+                    Modal body..
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
@@ -195,7 +185,7 @@
         </div>
     </div>
     <!-- end model popup -->
-</div>
+
 <!-- jQuery -->
 <script src="js/jquery/jquery.min.js"></script>
 <script src="js/popper.min.js"></script>
@@ -217,79 +207,84 @@
     var ps = new PerfectScrollbar('#sidebar');
 </script>
 <!-- fancy box js -->
-<!--<script src="js/jquery-3.3.1.min.js"></script>-->
+<script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/jquery.fancybox.min.js"></script>
 <!-- custom js -->
 <script src="js/custom.js"></script>
 <!-- calendar file css -->
 <script src="js/semantic.min.js"></script>
-<!-- Jquery DataTable Plugin Js -->
-<script src="modules/jquery-datatable/jquery.dataTables.js"></script>
-<script src="modules/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
-<script src="modules/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
-<script src="modules/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
-<script src="modules/jquery-datatable/extensions/export/jszip.min.js"></script>
-<script src="modules/jquery-datatable/extensions/export/pdfmake.min.js"></script>
-<script src="modules/jquery-datatable/extensions/export/vfs_fonts.js"></script>
-<script src="modules/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
-<script src="modules/jquery-datatable/extensions/export/buttons.print.min.js"></script>
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
 
-    $('#imagemModal').on('show.bs.modal', function (e) {
-
-        var data = $(e.relatedTarget).data('id');
-        var produto = $(e.relatedTarget).data('produto');
 
 
-       $('#imagem').attr('src','images/produtos/'+data);
-       $('#p_id').val(produto);
+    fillFields();
 
-    });
+    function fillFields(){
 
+        var p_id = sessionStorage.getItem("p_id");
 
-    function goToEditar(p_id){
+        //alert(p_id);
 
-        sessionStorage.setItem("p_id",p_id);
+        $.ajax({
+            url: 'php/controller/pesquisar/pesquisar_unico_produto.php',
+            type: "POST",
+            data: {
+                p_id:p_id
+            },
+            beforeSend: function(){
+                $('#carregamento').css("display","block");
+            },
+            complete: function(){
+                $('#carregamento').css("display","none");
+            },
+            success: function (data) {
 
-        window.location.href = 'editar_produto.php'
+               // alert(data);
 
-    }
+                var result = JSON.parse(data);
 
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+                if (result.estado === 'sucesso') {
 
-            var id = $(input).attr("id");
-            var img = '';
+                    $('#p_id').val(result.data[0].p_id);
+                    $('#p_nome').val(result.data[0].p_nome);
+                    $('#p_preco').val(result.data[0].p_preco);
+                    $('#p_desconto').val(result.data[0].p_desconto);
+                    $('#p_ultimo_preco').val(result.data[0].p_ultimo_preco);
+                    $('#p_descricao').val(result.data[0].p_descricao);
 
+                }
 
-            if(id === 'p_imagem'){
+            },
+            error: function (e) {
 
-                //alert('In');
-
-                reader.onload = function (e) {
-                    $('#img1')
-                        .attr('src', e.target.result);
-                };
+//          $("#err").html(e).fadeIn();
 
             }
+        });
 
 
-            reader.readAsDataURL(input.files[0]);
-        }
     }
 
-    $("#formAlterarFoto").on('submit',(function(e) {
+    $("#formActualizar").on('submit',(function(e) {
         e.preventDefault();
 
-        var action = $("#formAlterarFoto").attr('action');
+        var action = $("#formActualizar").attr('action');
 
-        var pic = $('#p_imagem').val();
+        //alert("Validate");
+
+        var p_nome = $('#p_nome').val();
+        var p_preco = $('#p_preco').val();
+        var p_ultimo_preco = $('#p_ultimo_preco').val();
+        var p_desconto = $('#p_desconto').val();
+        var categoria = $('#categoria').val();
+        var p_estado = $('#p_estado').val();
+        var p_descricao = $('#p_descricao').text();
 
 
-        if(pic === ""){
+        if(p_nome === "" || p_preco === "" || p_ultimo_preco === ""){
             swal({
                 title: "Aviso!",
                 text: "Os campos devem ser preenchidos com dados válidos!",
@@ -313,7 +308,7 @@
                 },
                 success: function (data) {
 
-                    //alert(data);
+                 //alert(data);
 
                     var result = JSON.parse(data);
 
@@ -348,7 +343,33 @@
 
 
 
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            var id = $(input).attr("id");
+            var img = '';
+
+
+            if(id === 'p_imagem'){
+
+                //alert('In');
+
+                reader.onload = function (e) {
+                    $('#img1')
+                        .attr('src', e.target.result);
+                };
+
+            }
+
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
 </script>
+
+
 
 
 </body>

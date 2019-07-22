@@ -196,7 +196,7 @@
 
         var action = $("#formAdicionar").attr('action');
 
-        alert("Validate");
+        //alert("Validate");
 
         var c_nome = $('#c_nome').val();
         var c_descricao = $('#c_descricao').val();
@@ -234,7 +234,7 @@
                 },
                 success: function (data) {
 
-                                alert(data);
+                                //alert(data);
 
                     var result = JSON.parse(data);
 

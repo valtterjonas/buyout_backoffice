@@ -230,7 +230,7 @@
 
         var action = $("#formAdicionar").attr('action');
 
-        alert("Validate");
+        //alert("Validate");
 
         var p_nome = $('#p_nome').val();
         var p_preco = $('#p_preco').val();
@@ -273,7 +273,7 @@
                 },
                 success: function (data) {
 
-                                alert(data);
+                                //alert(data);
 
                     var result = JSON.parse(data);
 
