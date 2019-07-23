@@ -6,6 +6,8 @@
  * Time: 19:22
  */
 
+date_default_timezone_set("Africa/Maputo");
+
 $origin_latitude = $_REQUEST["origin_latitude"];
 $origin_longitude = $_REQUEST["origin_longitude"];
 

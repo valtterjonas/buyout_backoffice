@@ -6,6 +6,8 @@
  * Time: 03:13
  */
 
+date_default_timezone_set("Africa/Maputo");
+
 include_once ("../../../dao/pesquisa.php");
 include_once ("../../../dao/adicionar.php");
 

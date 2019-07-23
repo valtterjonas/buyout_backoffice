@@ -6,6 +6,8 @@
  * Time: 03:13
  */
 
+date_default_timezone_set("Africa/Maputo");
+
 include_once ("../../../dao/pesquisa.php");
 
 $categoria = select("s_subcategoria","*","ORDER BY s_id DESC");

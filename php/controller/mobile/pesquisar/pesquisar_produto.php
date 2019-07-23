@@ -5,6 +5,9 @@
  * Date: 16-06-2019
  * Time: 03:14
  */
+
+date_default_timezone_set("Africa/Maputo");
+
 include_once ("../../../dao/pesquisa.php");
 
 
