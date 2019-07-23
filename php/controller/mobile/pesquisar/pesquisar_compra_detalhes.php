@@ -123,6 +123,7 @@ function listaProdutos($compra_id){
 
         $mensagem[] = array(
             'produto_id'=>$produtos_preco[0]["p_id"],
+            'produto_imagem'=>$produtos_preco[0]["p_imagem"],
             'produto_nome'=>$produtos_preco[0]["p_nome"],
             'preco_unit'=>$produtos_preco[0]["p_preco"],
             'preco_total'=>number_format($produtos[$i]["cp_quantidade"] * $produtos_preco[0]["p_preco"],2,'.',','),
