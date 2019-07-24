@@ -64,7 +64,8 @@ if($compras){
             'data'=>date("d-M-Y", strtotime($compras[$i]["c_data_criacao"])),
             'estado'=>$estado,
             'valor_total'=>number_format(somaProdutos($compras[$i]["c_id"]),2,'.',','),
-            'tempo'=>tempo($dateDiffProduc)
+            'tempo'=>tempo($dateDiffProduc),
+            'ce_estado'=>$compras[$i]["ce_estado"]
         );
 
     }
