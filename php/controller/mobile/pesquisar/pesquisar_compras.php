@@ -21,7 +21,7 @@ if(isset($_REQUEST["u_id"])){
 
     }else{
 
-        $compras = select("c_compra c,ce_compra_estado ce","*","WHERE c.u_id = '$utilizador' AND ce.ce_estado LIKE '$estado' AND ce.ce_id = c.ce_id ORDER BY c.c_id DESC");
+        $compras = select("c_compra c,ce_compra_estado ce","*","WHERE c.u_id = '$utilizador' AND ce.ce_estado NOT LIKE 'entregue' AND ce.ce_id = c.ce_id ORDER BY c.c_id DESC");
 
     }
 }else {
