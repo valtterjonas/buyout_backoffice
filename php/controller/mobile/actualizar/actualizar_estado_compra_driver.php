@@ -45,10 +45,10 @@ if($addLocalizacao) {
 
             if ($actualizar) {
 
+                $tokens2 = select("md_mobile_device","md_token","WHERE id_utilizador = '$u_id' ORDER BY md_id DESC LIMIT 1");
 
                 if(strcmp($estado,"entregue") == 0){
 
-                    $tokens2 = select("md_mobile_device","md_token","WHERE id_utilizador = '$u_id' ORDER BY md_id DESC LIMIT 1");
 
                     $tokens = array();
 
@@ -61,6 +61,27 @@ if($addLocalizacao) {
                         'message' 	=> "Buyout",
                         'title'		=> "Aceitar entrega de produtos",
                         'subtitle'	=> "Pressione Aceitar",
+                        'compra_id'=> $compra_id,
+                        'type' => 'driver_report',
+                        'vibrate'	=> 1,
+                        'sound'		=> 1
+                    );
+
+                    $message_status = send_notification($tokens, $message);
+
+                }else if(strcmp($estado,"a_caminho") == 0){
+
+                    $tokens = array();
+
+                    for($i = 0; $i<count($tokens2); $i++){
+                        $tokens[] = $tokens2[$i]["md_token"];
+                    }
+
+                    $message = array
+                    (
+                        'message' 	=> "Buyout",
+                        'title'		=> "Produtos a caminho",
+                        'subtitle'	=> "Pressione para rastrear",
                         'compra_id'=> $compra_id,
                         'type' => 'driver_report',
                         'vibrate'	=> 1,
