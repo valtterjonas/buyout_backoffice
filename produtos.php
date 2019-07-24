@@ -234,6 +234,9 @@
 <script src="modules/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
 <script src="modules/jquery-datatable/extensions/export/buttons.print.min.js"></script>
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
 
 <script>
 
