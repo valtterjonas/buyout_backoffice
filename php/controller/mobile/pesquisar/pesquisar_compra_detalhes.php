@@ -73,7 +73,7 @@ if($compras){
             'longitude'=>$localizacao[0]["l_longitude"]."",
             'latitude_cliente'=>$localizacaoCliente[0]["l_latitude"],
             'longitude_cliente'=>$localizacaoCliente[0]["l_longitude"],
-            'tempo_chegada'=>"Não Aplicável",
+            'tempo_chegada'=>"Tempo Indeterminado",
             'valor_total'=>number_format(somaProdutos($compras[0]["c_id"]),2,'.',','),
             'dadosUser'=>$dadosUser[0],
             'listaProdutos2'=>array('Data'=>listaProdutos($compras[0]["c_id"]))
